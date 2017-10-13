@@ -1,7 +1,7 @@
 <!DOCTYPE HTML5>
 <html>
 <head>
-	<title>Page example</title>
+	<title>Page avec JS events</title>
 	 <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css" />
 </head>
 <body>
@@ -10,7 +10,7 @@
     <a class="nav-link active" href="#">Accueil</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="#">Start Wars</a>
+    <a class="nav-link" href="starwars.html">Start Wars</a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="#">Nous</a>
@@ -24,7 +24,14 @@
 <p class="text-center"><img src="images/logo.jpg" class="img-fluid" alt="Responsive image"></p>
 </div>
 
+<div class="alert alert-blue text-center" role="alert"> 
+  <p class="name mb-0">↓ Passez la souris dessus des images ↓</p>
+</div>
+
+
+
 <div class="card-deck">
+
   <div class="card" onmouseover="message2(1)">
     <img class="card-img-top" src="images/boutton.png" alt="Card image cap 1">
     <div class="card-body">
@@ -48,6 +55,8 @@
   </div>
 </div>
 
+  <script type="text/javascript" src="node_modules/popper.js/dist/umd/popper.min.js"></script>
+  <script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
   <script trype="text/javascript" src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
   <script type="text/javascript" src="js/a.js"></script>
 </body>
