@@ -4,3 +4,5 @@ function message2(num){
 	img=document.images[num].alt;
 	console.log(img)
 }
+
+
