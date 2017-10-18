@@ -4,7 +4,7 @@ $(document).ready(function(){
 		type:'GET',
 		dataType: 'JSON',
 		success: function(json){
-			console.log(json.name);
+			console.log("Nom depuis la console: "+json.name);
 			$("h2.name").text(json.name);
 		}
 	});
@@ -13,27 +13,52 @@ $(document).ready(function(){
 	$('.btnNext').hide();
 
 	const ITERACIONES_1=6;
-	const ITERACIONES_2=3;
 	let helper= {
-	  film:': ',
-	  counter:0,
-	  method: function (per,res) {
-		this.film += res.title+",";
-		this.counter++;
-		if (this.counter == 3) {
-		$(".row").empty();
-		for (var index = 0; index < ITERACIONES_1; index++) {
-			var a = $("<div data-toggle='modal' data-target='#myModal'" + 
-			"onclick=\"data2('"+per.results[index].name+"','"+per.results[index].height+
-			"','"+per.results[index].birth_year+"','"+per.results[index].mass+"','"+per.results[index].gender+"','"+this.film+"')\" class='col-md-4 text-center'><img src='images/st1.png' class='img-fluid'></img><p class=' text-center lead'>" +
-		  	per.results[index].name + "</p></div>");
-		$(".row").append(a);
-		  console.log(per.results[index].name);
-		  }
-		  $(".btnNext").attr("id", per.next);
-		  $(".btnNext").show();
-		}
-	  }
+			  film:': ',
+			  counter:0,
+			  flag: 0,
+			  film:0,
+			  method: function (per,res,num) {
+					this.counter++;
+					if(num == 1){
+						this.film += res.title+", ";
+						if (this.counter == (3)) {
+							$(".row").empty();
+							for (var index = 0; index < ITERACIONES_1; index++) {
+								var a = $("<div data-toggle='modal' data-target='#myModal'" + 
+								"onclick=\"data2('"+per.results[index].name+"','"+per.results[index].height+
+								"','"+per.results[index].birth_year+"','"+per.results[index].mass+"','"+per.results[index].gender+"','"+this.film+"')\" class='col-md-4 text-center'><img src='images/st1.png' class='img-fluid'></img><p class=' text-center lead'>" +
+							  	per.results[index].name + "</p></div>");
+							  $(".row").append(a);
+							  //console.log(per.results[index].name);
+							  }
+							  this.film =': '; 
+							  $(".btnNext").attr("id", per.next);
+							  $(".btnNext").show();
+							  
+						}
+				}else{
+					this.flag++;
+					while(this.film < 1){
+						this.film += res.title+", ";
+						this.film++;
+					}
+					if (this.flag == 3){
+					$(".row").empty();
+					for (var index = 0; index < ITERACIONES_1; index++) {
+						var a = $("<div data-toggle='modal' data-target='#myModal'" + 
+						"onclick=\"data2('"+per.results[index].name+"','"+per.results[index].height+
+						"','"+per.results[index].birth_year+"','"+per.results[index].mass+"','"+per.results[index].gender+"','"+this.film+"')\" class='col-md-4 text-center'><img src='images/st1.png' class='img-fluid'></img><p class=' text-center lead'>" +
+					  	per.results[index].name + "</p></div>");
+					$(".row").append(a);
+					  //console.log(per.results[index].name);
+					  }
+					  $(".btnNext").attr("id", per.next);
+					  $(".btnNext").show();
+					  this.flag=0;
+					}
+				}	
+			}
 	};
 	$.ajax({
 			url: 'https://swapi.co/api/people/?format=json',
@@ -43,14 +68,14 @@ $(document).ready(function(){
 			success: function(per){
 				var film;
 				for (var i = 0; i < ITERACIONES_1; i++) {
-					for (var index = 0; index < ITERACIONES_2; index++) {
+					for (var index = 0; index < per.results[i].films.length; index++) {
 						var ul = per.results[i].films[index];
 						$.ajax({
 							url:ul,
 							type: 'GET',
 							dataType: 'JSON',
 							success:function(res){
-								helper.method(per,res);
+									helper.method(per,res,1);	
 							}
 						}); 
 					} 
@@ -60,7 +85,6 @@ $(document).ready(function(){
 
 		$(".btnNext").click(function(){
 		var res = $(".btnNext").attr("id")
-		console.log(res);
 			$.ajax({
 				url: res,
 				type:'GET',
@@ -68,15 +92,16 @@ $(document).ready(function(){
 				crossDomain: true,
 				success: function(per){
 					var film;
-					for (var i = 0; i < ITERACIONES_1; i++) {
-						for (var index = 0; index < ITERACIONES_2; index++) {
+					for (var i = 0; i < ITERACIONES_1; i++) { 
+						for (var index = 0; index < per.results[i].films.length; index++) {
 							var ul = per.results[i].films[index];
 							$.ajax({
 								url:ul,
 								type: 'GET',
 								dataType: 'JSON',
+								crossDomain: true,
 								success:function(res){
-									helper.method(per,res);
+									 helper.method(per,res,2);
 								}
 							}); 
 						} 
@@ -85,10 +110,6 @@ $(document).ready(function(){
 			});
 	
 		});
-
-		
-
-
 });
 
 function data2(nom,poid,anni,mass,genre,film){
@@ -100,5 +121,5 @@ function data2(nom,poid,anni,mass,genre,film){
 	$(".modal-body").append("<div class='alert alert-secondary'><p>Anniversaire: "+anni+"</p></div>");
 	$(".modal-body").append("<div class='alert alert-success'><p>Masse: "+mass+"</p></div>");
 	$(".modal-body").append("<div class='alert alert-danger'><p>Genre: "+genre+"</p></div>");
-	$(".modal-body").append("<div class='alert alert-info'><p>Films Realisés"+film+"</p></div>");	
+	$(".modal-body").append("<div class='alert alert-info'><p>Films Realisés "+film+"</p></div>");	
 }
