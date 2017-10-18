@@ -13,30 +13,30 @@ $(document).ready(function(){
 	$('.btnNext').hide();
 
 	const ITERACIONES_1=6;
-	let helper= {
+	let helper = {
 			  film:': ',
 			  counter:0,
 			  flag: 0,
 			  film:0,
 			  method: function (per,res,num) {
 					this.counter++;
-					if(num == 1){
-						this.film += res.title+", ";
-						if (this.counter == (3)) {
-							$(".row").empty();
-							for (var index = 0; index < ITERACIONES_1; index++) {
-								var a = $("<div data-toggle='modal' data-target='#myModal'" + 
-								"onclick=\"data2('"+per.results[index].name+"','"+per.results[index].height+
-								"','"+per.results[index].birth_year+"','"+per.results[index].mass+"','"+per.results[index].gender+"','"+this.film+"')\" class='col-md-4 text-center'><img src='images/st1.png' class='img-fluid'></img><p class=' text-center lead'>" +
+				if(num == 1){
+					this.film += res.title+", ";
+					if (this.counter == (3)) {
+						$(".row").empty();
+						for (var index = 0; index < ITERACIONES_1; index++) {
+							var a = $("<div data-toggle='modal' data-target='#myModal'" + 
+							"onclick=\"data2('"+per.results[index].name+"','"+per.results[index].height+
+							"','"+per.results[index].birth_year+"','"+per.results[index].mass+"','"+per.results[index].gender+
+							"','"+this.film+"')\" class='col-md-4 text-center'><img src='images/st1.png' class='img-fluid'></img><p class=' text-center lead'>" +
 							  	per.results[index].name + "</p></div>");
 							  $(".row").append(a);
 							  //console.log(per.results[index].name);
-							  }
-							  this.film =': '; 
-							  $(".btnNext").attr("id", per.next);
-							  $(".btnNext").show();
-							  
 						}
+					 	this.film =': '; 
+						$(".btnNext").attr("id", per.next);
+						$(".btnNext").show();  
+					}
 				}else{
 					this.flag++;
 					while(this.film < 1){
@@ -48,18 +48,20 @@ $(document).ready(function(){
 					for (var index = 0; index < ITERACIONES_1; index++) {
 						var a = $("<div data-toggle='modal' data-target='#myModal'" + 
 						"onclick=\"data2('"+per.results[index].name+"','"+per.results[index].height+
-						"','"+per.results[index].birth_year+"','"+per.results[index].mass+"','"+per.results[index].gender+"','"+this.film+"')\" class='col-md-4 text-center'><img src='images/st1.png' class='img-fluid'></img><p class=' text-center lead'>" +
+						"','"+per.results[index].birth_year+"','"+per.results[index].mass+"','"+per.results[index].gender+
+						"','"+this.film+"')\" class='col-md-4 text-center'><img src='images/st1.png' class='img-fluid'></img><p class=' text-center lead'>" +
 					  	per.results[index].name + "</p></div>");
-					$(".row").append(a);
+						$(".row").append(a);
 					  //console.log(per.results[index].name);
 					  }
-					  $(".btnNext").attr("id", per.next);
-					  $(".btnNext").show();
-					  this.flag=0;
-					}
-				}	
-			}
+					$(".btnNext").attr("id", per.next);
+					$(".btnNext").show();
+					this.flag=0;
+				}
+			}	
+		}
 	};
+	
 	$.ajax({
 			url: 'https://swapi.co/api/people/?format=json',
 			type:'GET',
@@ -74,8 +76,8 @@ $(document).ready(function(){
 							url:ul,
 							type: 'GET',
 							dataType: 'JSON',
-							success:function(res){
-									helper.method(per,res,1);	
+						success:function(res){
+								helper.method(per,res,1);	
 							}
 						}); 
 					} 
@@ -91,25 +93,24 @@ $(document).ready(function(){
 				dataType: 'JSON',
 				crossDomain: true,
 				success: function(per){
-					var film;
-					for (var i = 0; i < ITERACIONES_1; i++) { 
-						for (var index = 0; index < per.results[i].films.length; index++) {
-							var ul = per.results[i].films[index];
-							$.ajax({
-								url:ul,
-								type: 'GET',
-								dataType: 'JSON',
-								crossDomain: true,
-								success:function(res){
-									 helper.method(per,res,2);
-								}
-							}); 
-						} 
-					}
+				var film;
+				for (var i = 0; i < ITERACIONES_1; i++) { 
+					for (var index = 0; index < per.results[i].films.length; index++) {
+						var ul = per.results[i].films[index];
+						$.ajax({
+							url:ul,
+							type: 'GET',
+							dataType: 'JSON',
+							crossDomain: true,
+						success:function(res){
+							    helper.method(per,res,2);
+							}
+						}); 
+					} 
 				}
-			});
-	
+			}
 		});
+	});
 });
 
 function data2(nom,poid,anni,mass,genre,film){
