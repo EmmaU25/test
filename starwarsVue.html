@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <title>Start Wars</title>
+   <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css" />
+</head>
+
+<body>
+  <ul class="navbar navbar-dark bg-dark">
+  <li class="nav-item">
+    <a class="nav-link active" href="index.html">Accueil</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="starwars.html">Start Wars</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">Vue Js</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link disabled" href="#">Contact</a>
+  </li>
+</ul>
+<!--image banne-->
+<div class="text-center">
+    <img src="images/stw.jpg" class="img-fluid" alt="Responsive image"/>
+</div>
+
+<div class="alert alert-dark text-center" role="alert"> 
+  <h2 id="name" class="name mb-0">
+      {{list.name}}
+    </h2>
+</div>
+
+<div id="names" class="row">
+    <div  v-for="i in list2" v-onclick='modal' data-toggle='modal' data-target='#myModal' class='col-md-4 text-center'>
+        <img src='images/st1.png' class='img-fluid'>
+        <p class=' text-center lead'>{{i.name}}</p>
+    </div>
+</div>
+
+<p class="text-center"><button class='btnNext btn input-block-level'>Montrer plus personages</button></p>
+<div><p></p></div>
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"></h4>
+      </div>
+      <div class="modal-body">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript" src="node_modules/vue/dist/vue.js"></script>
+  <script type="text/javascript" src="node_modules/vue-resource/dist/vue-resource.js"></script>
+   <script type="text/javascript" src="node_modules/popper.js/dist/umd/popper.min.js"></script>
+  <script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
+  
+  <script type="text/javascript" src="js/vue.js"></script>
+</body>
+
+</html>
