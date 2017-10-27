@@ -1,5 +1,5 @@
 var per = 'https://swapi.co/api/people/1/?format=json';
-var name = new Vue ({
+new Vue ({
     el:'#name',
     created: function(){
         this.getPer();
@@ -17,20 +17,35 @@ var name = new Vue ({
     }
 });
 
+
 var pers = 'https://swapi.co/api/people/?format=json';
-var names = new Vue({
+new Vue({
     el: '#names',
     created: function(){
         this.getPerso();
     },
     data:{
-        list2:[]
+        list2:[],
+        next : ''
     },
     methods: {
         getPerso: function(){
             this.$http.get(pers).then(function(res){
                     this.list2 = res.data.results;
+                    this.list2.splice(6,10);
+                    this.next = res.data.next;
+            });
+        },
+        nexte:function(event){
+            this.$http.get(this.next).then(function(res){
+                this.list2 = res.data.results;
+                this.list2.splice(6,10);
+                this.next = res.data.next;
+               
             });
         }
     }
 });
+
+
+
