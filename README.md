@@ -4,7 +4,7 @@ ces modules(JQuery, Boostrap, Popper, Vue, etc).
 Le projet a une connection avec un API qui s'appelle "SWAPI" lequel montre des personages des films STARWARS avec ces 
 caracteristiques.
 
-# Includes
+### Includes
 - JavaScript/JQuery
 - Boostrap
 - Page d'accueil
@@ -13,8 +13,9 @@ caracteristiques.
 - Page de Starwars avec Vue JS
 
 
-# Installation
-- Tapez git Clone avec la direccion 
-- Tapez git init dans le dossier du projet
-- Tapez npm i --save pour synchroniser les modules de NPM et pouvoir avoir Bootstrap, JQuery 
+### Installation
+- Telecharger et installer un logiciel de gestion de version, par example GIT: https://git-scm.com/downloads
+- Tapez le command dans le logiciel de gestion de version " git clone https://github.com/EmmaU25/test.git " 
+- Tapez git init dedans le dossier du projet
+- Apres tapez " npm i --save " pour synchroniser les modules de NPM et pouvoir avoir Bootstrap, JQuery 
 - Après, il faut ouvrir le fichier index.html a travers d'un navigateur web (Chrome, Firefox)
