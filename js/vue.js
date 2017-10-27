@@ -43,6 +43,21 @@ new Vue({
                 this.next = res.data.next;
                
             });
+        },
+        details:function(key){  
+            $(".modal-body > div").remove();
+            $(".modal-title > p").remove();
+            $(".modal-title").append("<p>Description de "+ this.list2[key].name+"</p>");
+            $(".modal-body").append("<div class='alert alert-primary'><p>Poid: "+ this.list2[key].height+" </p></div>");
+            $(".modal-body").append("<div class='alert alert-secondary'><p>Anniversaire: "+ this.list2[key].birth_year+"</p></div>");
+            $(".modal-body").append("<div class='alert alert-success'><p>Masse: "+ this.list2[key].mass+"</p></div>");
+            $(".modal-body").append("<div class='alert alert-danger'><p>Genre: "+ this.list2[key].gender+"</p></div>");
+            $(".modal-body").append("<div class='alert alert-info films'>Films Realisés</div>");
+            for (var index = 0; index < this.list2[key].films.length; index++) {
+                this.$http.get(this.list2[key].films[index]).then(function(res){
+                   $(".films").append("<p>"+res.data.title+"</p>");
+                });
+            }
         }
     }
 });
