@@ -31,16 +31,22 @@
       {{list.name}}
     </h2>
 </div>
+<div id="names">
 
-<div id="names" class="row">
-    <div  v-for="i in list2" v-onclick='modal' data-toggle='modal' data-target='#myModal' class='col-md-4 text-center'>
+  <div class="row">
+      <div v-for="(i,key) in list2" id="per" v-on:click="details(key)" data-toggle='modal' data-target='#myModal' class='col-md-4 text-center'> 
         <img src='images/st1.png' class='img-fluid'>
-        <p class=' text-center lead'>{{i.name}}</p>
-    </div>
+          <p  class=' text-center lead'>{{i.name}}</p>
+      </div>  
+  </div>
+
+
+  <p class="text-center">
+    <button v-on:click="nexte" class='btnNext btn input-block-level'>Montrer plus personages</button>
+  </p>
+
 </div>
 
-<p class="text-center"><button class='btnNext btn input-block-level'>Montrer plus personages</button></p>
-<div><p></p></div>
 <div id="myModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -56,12 +62,12 @@
     </div>
   </div>
 </div>
-<script type="text/javascript" src="node_modules/vue/dist/vue.js"></script>
+
+  <script type="text/javascript" src="node_modules/vue/dist/vue.js"></script>
   <script type="text/javascript" src="node_modules/vue-resource/dist/vue-resource.js"></script>
-   <script type="text/javascript" src="node_modules/popper.js/dist/umd/popper.min.js"></script>
+  <script type="text/javascript" src="node_modules/popper.js/dist/umd/popper.min.js"></script>
   <script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
   <script type="text/javascript" src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
-  
   <script type="text/javascript" src="js/vue.js"></script>
 </body>
 
