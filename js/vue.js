@@ -37,12 +37,17 @@ new Vue({
             });
         },
         nexte:function(event){
-            this.$http.get(this.next).then(function(res){
-                this.list2 = res.data.results;
-                this.list2.splice(6,10);
-                this.next = res.data.next;
-               
-            });
+            if (this.next== null) {
+                alert("Il n y a plus personages");
+            }else{
+                this.$http.get(this.next).then(function(res){
+                    this.list2 = res.data.results;
+                    this.list2.splice(6,10);
+                    this.next = res.data.next;
+                   
+                });
+            }
+            
         },
         details:function(key){  
             $(".modal-body > div").remove();

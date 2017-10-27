@@ -87,29 +87,33 @@ $(document).ready(function(){
 
 		$(".btnNext").click(function(){
 		var res = $(".btnNext").attr("id")
-			$.ajax({
+			if (res == null) {
+				alert("Il n y plus personages");
+			}else{
+				$.ajax({
 				url: res,
 				type:'GET',
 				dataType: 'JSON',
 				crossDomain: true,
-				success: function(per){
-				var film;
-				for (var i = 0; i < ITERACIONES_1; i++) { 
-					for (var index = 0; index < per.results[i].films.length; index++) {
-						var ul = per.results[i].films[index];
-						$.ajax({
-							url:ul,
-							type: 'GET',
-							dataType: 'JSON',
-							crossDomain: true,
-						success:function(res){
-							    helper.method(per,res,2);
-							}
-						}); 
-					} 
-				}
+					success: function(per){
+						var film;
+						for (var i = 0; i < ITERACIONES_1; i++) { 
+							for (var index = 0; index < per.results[i].films.length; index++) {
+								var ul = per.results[i].films[index];
+								$.ajax({
+									url:ul,
+									type: 'GET',
+									dataType: 'JSON',
+									crossDomain: true,
+								success:function(res){
+										helper.method(per,res,2);
+									}
+								}); 
+							} 
+						}
+					}
+				});
 			}
-		});
 	});
 });
 
