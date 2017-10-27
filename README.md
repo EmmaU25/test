@@ -15,6 +15,7 @@ caracteristiques.
 
 ### Installation
 - Telecharger et installer un logiciel de gestion de version, par example GIT: https://git-scm.com/downloads
+- Telecharger et installer Node.Js https://nodejs.org/es/download/
 - Tapez le command dans le logiciel de gestion de version " git clone https://github.com/EmmaU25/test.git " 
 - Tapez git init dedans le dossier du projet
 - Apres tapez " npm i --save " pour synchroniser les modules de NPM et pouvoir avoir Bootstrap, JQuery 
